@@ -1,0 +1,37 @@
+##firstly, creates an object with value NULL the it sets the value x the matrix then next step is to get the matrix
+##Now set the inverse of the funvtion, and then get that inverse. In last determine the list that will contain the prevoiusly values.
+##second function answers or gets that value that you defined in the first function.
+##then get the inverse, only if it has not been made in the first function.
+##so this function only makes the cache matrix.
+
+makeCacheMatrix <- function(x = matrix()) {
+  j <- NULL
+  set <- function(y){
+  x <<- y
+  j <<- NULL
+  }
+  get <- function()x
+  setInverse <- function(inverse) j <<- inverse
+  getInverse <- function() j 
+  list(set = set, get = get, 
+  setInverse = setInverse, 
+  getInverse = getInverse)
+  }
+
+##now just changing the vector object
+##for a matrix, still a problem ocurred to me at first, the function "solve" culd solve the input
+##matrix this is because the matrix was made by me and had some values related so it could get the inverse 
+##so the matrix has to be squared and other charcteristics to that it can be inverted.
+
+cacheSolve <- function(x, ...) {
+## Return a matrix that is the inverse of 'x'
+  j <- x$getInverse()
+  if(!is.null(j)){
+  message("getting cached data")
+  return(j)
+  }
+  mat <- x$get()
+  j <- solve(mat,...)
+  x$setInverse(j)
+  j
+  }
